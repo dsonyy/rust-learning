@@ -13,8 +13,13 @@ fn main() {
         io::stdin().read_line(&mut guess)
             .expect("An error occured while entering data!");
 
-        let guess: i32 = guess.trim().parse()
-            .expect("Please enter valid number!");
+        let guess: i32 = match guess.trim().parse() {
+            Ok(numsa) => numsa,
+            Err(_) => {
+                println!("Please enter valid number!");
+                continue;
+            },
+        };
 
         match guess.cmp(&secret) {
             Ordering::Less => println!("Too small!"),
@@ -25,5 +30,5 @@ fn main() {
             }
         }
     }
-
+    
 }
